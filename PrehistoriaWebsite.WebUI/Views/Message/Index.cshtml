@@ -1,0 +1,86 @@
+﻿@model IEnumerable<PrehistoryWebsite.Domain.Message>
+@using PrehistoryWebsite.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Account/_AccountLayout.cshtml";
+}
+
+@Html.SetTitleAdminSection("Mensajes")
+
+@{
+    string succeededMessage = ViewBag.Succeeded;
+    @Html.ShowMessages(ViewData.ModelState.IsValid, succeededMessage)
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+        @if (Model.Count() != 0)
+        {
+            <table id="dataTables-example" class="table table-striped table-bordered table-hover dataTable no-footer" aria-describedby="dataTables-example_info">
+                <thead>
+                </thead>
+                <tbody>
+
+
+                    @foreach (var item in Model)
+                    {
+ 
+                        <tr>
+                            <td>
+                                @if (item.isRead ?? false)
+                                {
+                                    @Html.DisplayFor(modelItem => item.email)
+                                }
+                                else
+                                {
+                                    <strong>@Html.DisplayFor(modelItem => item.email)</strong>
+                                }
+                            </td>
+                            <td>
+                                @if (item.isRead ?? false)
+                                {
+                                    @Html.DisplayFor(modelItem => item.asunto)
+                                }
+                                else
+                                {
+                                    <strong>@Html.DisplayFor(modelItem => item.asunto)</strong>
+                                }
+                            </td>
+                            <td>
+                                @if (item.isRead ?? false)
+                                {
+                                    @Html.DisplayNewsSearchSummary(item.descriptionMessage, 50)
+                                }
+                                else
+                                {
+                                    <strong>@Html.DisplayNewsSearchSummary(item.descriptionMessage, 50)</strong>
+                                }
+                            </td>
+                            <td>
+                                @if (item.isRead ?? false)
+                                {
+                                    @Html.GetDate(item.dateSend)
+                                }
+                                else
+                                {
+                                    <strong>@Html.GetDate(item.dateSend)</strong>
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Ver", "Details", new { id = item.id }) |
+                                @Html.ActionLink("Borrar", "Delete", new { id = item.id }, new { onclick = "return confirm('" + SystemMessages.WarnningDelete + "');" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            @: No hay mensajes   
+        }
+    </div>
+</div>

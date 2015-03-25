@@ -1,0 +1,29 @@
+﻿@model PrehistoryWebsite.Domain.Message
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Account/_AccountLayout.cshtml";
+}
+
+@section CSS{
+
+    <link href="~/Content/themes/startbootstrap-sb-admin-2-1.0.1/css/ExtraAdmin.css" rel="stylesheet" />
+}
+
+@Html.SetTitleAdminSection(Model.asunto)
+
+<div class="col-lg-6">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <strong>@Html.DisplayFor(model => model.email)</strong>
+            <p class=" navbar-right">@Html.GetDate(Model.dateSend)</p>
+            <div class="clr"></div>
+            <div class="panel panel-default m5">@Html.DisplayFor(model => model.descriptionMessage)</div>
+
+        </div>
+    </div>
+</div>
+<div class="clr"></div>
+<p>
+    @Html.ActionLink("Volver", "Index")
+</p>

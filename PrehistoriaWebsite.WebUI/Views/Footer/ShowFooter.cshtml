@@ -1,0 +1,35 @@
+﻿@model PrehistoryWebsite.Domain.Footer
+
+
+<div class="fbg">
+    <div class="fbg_resize">
+        <div class="col c1">
+
+            <h2><span>@Model.title1</span></h2>
+            @Html.Raw(Model.content1)
+        </div>
+        <div class="col c2">
+            <h2><span>@Model.title2</span></h2>
+            @Html.Raw(Model.content2)
+        </div>
+        <div class="col c3">
+            <h2><span>@Model.title3</span></h2>
+
+            <a target="_blank" href="http://twitter.com/Prehistory_">
+                <img width="38" height="38" alt="Síguenos en Twitter" src="https://lh6.googleusercontent.com/-vao9pzZoGtk/T6VYC4d1YMI/AAAAAAAAA0U/4rdP2chJido/s48/twitter48.png"></a>
+
+            <a target="_blank" href="http://www.facebook.com/pages/Prehistory/461896937168731">
+                <img width="38" height="38" src="https://lh3.googleusercontent.com/-NSLbC_ztNls/T6VX0g6z8AI/AAAAAAAAA0A/_vyIBrmZbuY/s48/facebook48.png" alt="Siguenos en Facebook"></a>
+
+            <a target="_blank" href="https://plus.google.com/u/0/116712172549358976899/posts">
+                <img width="38" height="38" src="https://lh4.googleusercontent.com/-YkgFxeGiyTs/T6VX1-4b99I/AAAAAAAAA0A/OVEd2C4lyK4/s48/google48.png" alt="Siguenos en Google+"></a>
+
+            <a target="_blank" href="http://www.youtube.com/MMOPrehistoria">
+                <img width="38" height="38" src="https://lh6.googleusercontent.com/-Atgpy-x_OwI/T6mYkA18hYI/AAAAAAAAA1U/qksUJ5uBq3c/s48/youtube48.png" alt="Siguenos en YouTube"></a>
+
+            @Html.Partial("Value", new PrehistoryWebsite.Models.MessageModel())
+
+        </div>
+        <div class="clr"></div>
+    </div>
+</div>

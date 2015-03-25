@@ -1,0 +1,24 @@
+﻿@model PrehistoryWebsite.Models.MessageModel
+
+
+
+@using (Ajax.BeginForm("MessageSend", "Message", null, new AjaxOptions
+    {
+        InsertionMode = InsertionMode.Replace,//target element(#messageFooter) will be replacet
+        UpdateTargetId = "messageFooter"
+    },
+    new { @class = "contact-form" }
+    ))
+{
+    <div id="messageFooter">
+        @Html.TextBoxFor(x => x.Email, new { placeholder = "Email" })
+        @Html.TextBoxFor(x => x.Asunto, new { placeholder = "Asunto" })
+        @Html.TextAreaFor(x => x.Message, new { placeholder = "Mensaje" })
+
+        @Html.TextBoxFor(x => x.CheckSpam, new { style = "display:none;" })
+
+        <button type="submit">Enviar</button>
+    </div>
+}
+
+
