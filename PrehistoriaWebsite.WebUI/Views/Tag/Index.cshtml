@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PrehistoryWebsite.Domain.Tag>
+@using PrehistoryWebsite.Models
+
+@{
+    ViewBag.Title = "Tags";
+    Layout = "~/Views/Shared/Account/_AccountLayout.cshtml";
+}
+
+@section CSS{
+    <link href="~/Content/themes/others/tag%20brick%20style.css" rel="stylesheet" />
+}
+
+
+
+@{
+    string succeededMessage = ViewBag.Succeeded;
+    @Html.ShowMessages(ViewData.ModelState.IsValid, succeededMessage)
+}
+
+
+<div class="panel panel-default">
+    <div class="panel-body">
+
+@Html.Partial("_Add", model:new PrehistoryWebsite.Models.StringModel {St = "" } )
+
+        </div><div class="panel-body">
+
+@foreach (var item in Model) {
+    <span class="BrickStyle">
+        @Html.ActionLink(item.nameTag, "Edit", "Tag", new { tagSlug = item.urlSlug }, null) 
+        @Html.ActionLink("x", "Delete", "Tag", new { tagSlug = item.urlSlug }, new { onclick = "return confirm('"+SystemMessages.WarnningDelete+"');" }) 
+    </span>
+}
+
+
+        </div></div>

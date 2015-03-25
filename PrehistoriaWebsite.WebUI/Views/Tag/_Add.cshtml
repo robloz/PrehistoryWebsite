@@ -1,0 +1,11 @@
+﻿@model PrehistoryWebsite.Models.StringModel
+
+
+@using (@Html.BeginForm("Add", "Tag"))
+
+{
+    @Html.TextBoxFor(x => x.St);
+    <button class="btn btn-primary"  type="submit">Añadir</button>
+    
+}
+
