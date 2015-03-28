@@ -21,16 +21,50 @@
 <div class="panel panel-default">
     <div class="panel-body">
 
-@Html.Partial("_Add", model:new PrehistoryWebsite.Models.StringModel {St = "" } )
+        <div class="m-bottom-12">
+            <input id="searchTextBox" type="text" value=""/>
+            <input id="searchButton" class="btn btn-primary" type="button" value="Buscar"/>
+            </div>
 
-        </div><div class="panel-body">
+        @Html.Partial("_Add", model: new PrehistoryWebsite.Models.StringModel { St = "" })
 
-@foreach (var item in Model) {
-    <span class="BrickStyle">
-        @Html.ActionLink(item.nameTag, "Edit", "Tag", new { tagSlug = item.urlSlug }, null) 
-        @Html.ActionLink("x", "Delete", "Tag", new { tagSlug = item.urlSlug }, new { onclick = "return confirm('"+SystemMessages.WarnningDelete+"');" }) 
-    </span>
+    </div>
+    <div class="panel-body">
+
+        @foreach (var item in Model)
+        {
+            <span class="BrickStyle">
+                @Html.ActionLink(item.nameTag, "Edit", "Tag", new { tagSlug = item.urlSlug }, new { @class="tag_name"})
+                @Html.ActionLink("x", "Delete", "Tag", new { tagSlug = item.urlSlug }, new { onclick = "return confirm('" + SystemMessages.WarnningDelete + "');" })
+            </span>
+        }
+
+
+    </div>
+</div>
+
+@section ScriptEnd{
+
+    <script>
+    $(document).ready(function(){
+    
+        $("#searchButton").click(function () {
+
+            // get value
+            var valueSearch = $("#searchTextBox").val();
+
+            // clearing previous searchings
+            $(".BrickStyle").removeClass("BrickStyle_highlight");
+
+            $(".BrickStyle").each(function () {
+                // check both in upper case
+                if ($(this).children(".tag_name").text().toUpperCase() == valueSearch.toUpperCase()) {
+                    // add the new class with different background color
+                    $(this).addClass("BrickStyle_highlight");
+                }
+            })
+        })
+
+    })
+        </script>
 }
-
-
-        </div></div>
