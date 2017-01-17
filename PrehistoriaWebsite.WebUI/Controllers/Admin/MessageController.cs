@@ -22,7 +22,6 @@ namespace PrehistoryWebsite.Controllers.Admin
         // GET: /Message/
         public ActionResult Index(string SuccessMessage = "")
         {
-
             ViewBag.Succeeded = SuccessMessage;
 
             return View(_repository.Messages);
@@ -39,7 +38,7 @@ namespace PrehistoryWebsite.Controllers.Admin
         // GET: /Message/Details
         public ActionResult Details(int id)
         {
-            Message message = _repository.FindMessage(id);
+            var message = _repository.FindMessage(id);
 
             if (message != null)
             {
@@ -53,7 +52,6 @@ namespace PrehistoryWebsite.Controllers.Admin
                 ShowErrorModelState(SystemMessages.ErrorElmentNoExist);
                 return View(_repository.Messages);
             }
-
         }
 
         // Post: /Message/MessageSend
@@ -75,7 +73,6 @@ namespace PrehistoryWebsite.Controllers.Admin
                     };
 
                     _repository.Save(message);
-
                 }
 
                 return PartialView(@"~\Views\Footer\Message.cshtml");
@@ -89,11 +86,10 @@ namespace PrehistoryWebsite.Controllers.Admin
         // GET: /Message/RecentMessages
         public ActionResult RecentMessages()
         {
-            // I take up to 3 messages
+            // taking the last 3 messages
             IEnumerable<Message> messagesUnread = _repository.Messages.Where(x => x.isRead == false).Take(3);
 
             return PartialView("_RecentMessages", messagesUnread);
         }
-
     }
 }
