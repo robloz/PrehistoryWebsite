@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PrehistoryWebsite.Domain;
@@ -13,7 +12,6 @@ namespace PrehistoryWebsite.Controllers.Admin
     [Authorize(Roles = RolesUsersSystem.roleAdmin + "," + RolesUsersSystem.roleSuperAdmin + "," + RolesUsersSystem.roleEditor)]
     public class FooterController : Controller
     {
-
         IRepository _repository;
 
         public FooterController(IRepository repository)
@@ -24,7 +22,7 @@ namespace PrehistoryWebsite.Controllers.Admin
         // GET /Footer/
         public ActionResult Index(string SuccessMessage = "")
         {
-            FooterModel model = new FooterModel();
+            var model = new FooterModel();
 
             model.SetFooter(_repository.footer);
 
@@ -37,7 +35,7 @@ namespace PrehistoryWebsite.Controllers.Admin
         [HttpPost]
         public ActionResult Save(FooterModel model)
         {
-            string SuccessMessage = "";
+            var SuccessMessage = "";
 
             if (ModelState.IsValid)
             {
@@ -47,7 +45,6 @@ namespace PrehistoryWebsite.Controllers.Admin
             }
 
             return RedirectToAction("Index", new { SuccessMessage = SuccessMessage });
-
         }
 
         // Partial View
@@ -56,8 +53,5 @@ namespace PrehistoryWebsite.Controllers.Admin
         {
             return PartialView(_repository.footer);
         }
-
-
-
     }
 }
