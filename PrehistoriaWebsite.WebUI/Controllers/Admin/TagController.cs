@@ -23,13 +23,11 @@ namespace PrehistoryWebsite.Controllers
             this._repository = repository;
         }
 
-        //
         // GET: /Tag/
-
         public ActionResult Index()
         {
-            string error = TempData[TempDataStrings.errors] as string;
-            string exitsMessage = TempData[TempDataStrings.exitsMessage] as string;
+            var error = TempData[TempDataStrings.errors] as string;
+            var exitsMessage = TempData[TempDataStrings.exitsMessage] as string;
 
             if (exitsMessage != null && exitsMessage != null)
             {
@@ -45,10 +43,9 @@ namespace PrehistoryWebsite.Controllers
         }
 
         // GET: /Tag/slugTag
-
         public ActionResult Edit(string tagSlug)
         {
-           Tag tag = _repository.Find(tagSlug);
+           var tag = _repository.Find(tagSlug);
 
            if (tag == null)
            {
@@ -62,7 +59,6 @@ namespace PrehistoryWebsite.Controllers
         [HttpPost]
         public ActionResult Edit(Tag model)
         {
-
             if (_repository.Find(model.id) != null)
             {
                 // update his slug
@@ -77,14 +73,12 @@ namespace PrehistoryWebsite.Controllers
                 TempData[TempDataStrings.errors] = SystemMessages.ErrorElmentNoExist;
             }
 
-
             return RedirectToAction("Index");
         }
 
-
         public ActionResult Delete(string tagSlug)
         {
-            Tag tag = _repository.Find(tagSlug);
+            var tag = _repository.Find(tagSlug);
 
             if (tag != null)
             {
@@ -102,15 +96,13 @@ namespace PrehistoryWebsite.Controllers
         [HttpPost]
         public ActionResult Add(StringModel model)
         {
-
-            string nameTag = model.St;
-            string slug = UrlSluggerGenerator.ToUrlSlug(nameTag);
-
-            Tag tag = _repository.Find(slug);
+            var nameTag = model.St;
+            var slug = UrlSluggerGenerator.ToUrlSlug(nameTag);
+            var tag = _repository.Find(slug);
 
             if (tag == null)
             {
-                Tag newTag = new Tag { nameTag = nameTag, urlSlug = slug };
+                var newTag = new Tag { nameTag = nameTag, urlSlug = slug };
                 _repository.Save(newTag);
 
                 TempData[TempDataStrings.exitsMessage] = SystemMessages.SuccessAdd;
@@ -122,7 +114,5 @@ namespace PrehistoryWebsite.Controllers
 
             return RedirectToAction("Index");
         }
-
-
     }
 }
